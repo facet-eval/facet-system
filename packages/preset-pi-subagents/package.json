@@ -1,0 +1,20 @@
+{
+  "name": "@facet/preset-pi-subagents",
+  "version": "0.1.0",
+  "description": "FACET profile preset — Pi harness with @tintinweb/pi-subagents + pinned per-run agent definitions under profile/agents/.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:9cb2d824d52e4e9ac0bbc11abd39206c947e5f9ea90afb9f2d7f5b65c5ebc5ca"
+  },
+  "peerDependencies": {
+    "@facet/harness-pi": "workspace:*",
+    "@tintinweb/pi-subagents": "0.6.1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@facet/preset-pi-lens",
+  "version": "0.1.0",
+  "description": "FACET profile preset — Pi harness with pi-lens emitting structural-warning markers on write/edit results.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:41cddd5bb992a9a97468f6452abe034ef0d6df1fa77fc6775e3240e1c5189c4f"
+  },
+  "peerDependencies": {
+    "@facet/harness-pi": "workspace:*",
+    "pi-lens": "3.8.32"
+  }
+}

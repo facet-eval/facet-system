@@ -1,0 +1,25 @@
+{
+  "name": "@facet/sdk",
+  "version": "0.1.0",
+  "description": "Public extension SDK for FACET — interfaces and defineX helpers, zero runtime deps.",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./harness": "./dist/harness.js",
+    "./factor-kind": "./dist/factor-kind.js",
+    "./trace-event": "./dist/trace-event.js",
+    "./metric-kind": "./dist/metric-kind.js",
+    "./evaluator-layer": "./dist/evaluator-layer.js",
+    "./output-emitter": "./dist/output-emitter.js",
+    "./workspace-strategy": "./dist/workspace-strategy.js",
+    "./extensions-yaml": "./dist/extensions-yaml.js",
+    "./profile-package": "./dist/profile-package.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests"
+  },
+  "peerDependencies": {
+    "zod": "^3.23.8"
+  }
+}

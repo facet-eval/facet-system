@@ -1,0 +1,39 @@
+{
+  "//": "Workspace root: tooling deps only. Each package under packages/* publishes independently.",
+  "name": "facet-monorepo",
+  "version": "0.1.0",
+  "description": "FACET — extensible framework for evaluating code agents.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "vitest run",
+    "lint:deadcode": "! ts-prune --project packages/core/tsconfig.json | grep -v 'used in module' | grep -v '/dist/' | grep .",
+    "facet": "node ./packages/core/dist/cli/index.js"
+  },
+  "devDependencies": {
+    "@dreki-gg/pi-lsp": "0.1.2",
+    "@facet/preset-pi-default": "workspace:*",
+    "@facet/preset-pi-graph": "workspace:*",
+    "@facet/preset-pi-lens": "workspace:*",
+    "@facet/preset-pi-lsp": "workspace:*",
+    "@facet/preset-pi-rag": "workspace:*",
+    "@facet/preset-pi-subagents": "workspace:*",
+    "@mariozechner/pi-coding-agent": "^0.70.0",
+    "@tintinweb/pi-subagents": "0.6.1",
+    "@types/node": "^22.9.0",
+    "pi-gitnexus": "0.5.1",
+    "pi-lens": "3.8.32",
+    "pi-local-rag": "0.3.0",
+    "ts-prune": "^0.10.3",
+    "tsx": "^4.19.2",
+    "typebox": "^1.1.24",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5",
+    "yaml": "^2.5.1",
+    "zod": "^3.23.8"
+  }
+}

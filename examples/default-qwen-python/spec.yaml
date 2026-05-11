@@ -1,0 +1,84 @@
+metadata:
+  id: default-qwen-python-001
+  name: "Default Profile Only — qwen3.5-9b, Python scenario"
+  description: >
+    Minimal slice of subagent-routing-qwen: only the default profile and
+    the compound-python scenario, using qwen3.5-9b. Measures how prompt
+    specificity alone affects correctness with a single profile and a
+    single scenario. Matrix: 3 prompts × 1 profile × 1 model × 1 scenario
+    × 1 repetition = 3 runs.
+  version: "0.1.0"
+  author: "Diego"
+  seed: 42
+  framework_version: "0.1.0"
+  harness:
+    id: "pi"
+    package: "@facet/harness-pi"
+    version: "0.70.0"
+
+environment:
+  timeout_per_run_seconds: 900
+  max_tokens_per_run: 200000
+  max_total_cost_usd: 1.0
+  workspace_strategy: "git_worktree"
+
+varying_factors:
+  - id: prompt_id
+    description: "Prompt specificity level (subagent-aware variant of factor-study §2.1)."
+    levels:
+      - id: underspecified
+      - id: medium
+      - id: specific
+
+  - id: profile
+    description: "Agent profile — only default is tested."
+    levels:
+      - id: default
+        ref: "@facet/preset-pi-default"
+        hash: "sha256:4177c4c688febb958650363d595884de86c2ff0872166baccc106def850e608e"
+
+  - id: model
+    description: >
+      OpenRouter model id — qwen3.5-9b only.
+    levels:
+      - id: qwen3.5-9b
+        provider: openrouter
+        model_id: "qwen/qwen3.5-9b"
+
+scenarios:
+  - id: compound-python
+    ref: "scenarios/compound-python"
+    hash: "TBD"
+
+design:
+  type: full_factorial
+  repetitions: 1
+  parallelism: 4
+
+comparisons:
+  - id: prompt_specificity
+    description: "How does prompt specificity affect correctness for the default profile on a Python compound task?"
+    across: prompt_id
+    holding_constant: [profile, model]
+
+metrics:
+  trace:
+    capture:
+      - tool_calls
+      - tokens_in
+      - tokens_out
+      - latency_ms_per_turn
+      - file_reads
+      - context_size_per_turn
+  evaluator:
+    layers:
+      - id: correctness
+        type: oracle_script
+        script: "oracle/run.sh"
+        pass_condition: "exit_code == 0"
+  judge: null
+
+analysis:
+  type: none
+  emit:
+    - results_table_csv

@@ -1,0 +1,16 @@
+extensions:
+  - package: "@dreki-gg/pi-lsp"
+    version: "0.1.2"
+    entry: "extensions/lsp"
+
+language_servers:
+  compound-c: "clangd"
+  compound-haskell: "haskell-language-server"
+  compound-python: "pylsp"
+
+# Profile-declared layer-2 metrics (Phase 4 / architecture doc §R1).
+metrics:
+  - id: lsp_queries_count
+    kind: tool_call_count
+    tool_names:
+      - lsp

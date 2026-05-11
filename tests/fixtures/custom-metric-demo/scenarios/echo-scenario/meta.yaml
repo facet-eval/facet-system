@@ -1,0 +1,9 @@
+id: echo-scenario
+language: text
+task_type: trivial
+difficulty: trivial
+tags: [greenfield, deterministic-oracle]
+prompts:
+  - id: ping
+    file: prompts/ping.md
+task_ids: [task1]

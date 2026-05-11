@@ -1,0 +1,32 @@
+extensions:
+  - package: "@tintinweb/pi-subagents"
+    version: "0.6.1"
+    entry: "src/index.ts"
+
+# Per-run pinned agents (Phase 5). The runner copies every .md file
+# under <profile>/agents/ into the per-run agent directory, substituting
+# `${RUN_MODEL}` with the run's `<provider>/<modelId>` so every spawned
+# sub-agent resolves to the parent run's model. inherit_user_models_json
+# preserves the user's custom models.json so sub-agents see the same
+# model registry the parent does.
+pinned_agents:
+  source_dir: "agents"
+  model_placeholder: "${RUN_MODEL}"
+  inherit_user_models_json: true
+
+# Profile-declared layer-2 metrics (Phase 4 / architecture doc §R1).
+# Two metrics: a count of subagent-related tool invocations and a max-depth
+# projection. Today the depth is capped at 1 by trace-shape limitations
+# (parent agent's trace does not nest sub-agent calls); a future
+# trace-shape change would unlock real depth without changing the kind.
+metrics:
+  - id: subagent_invocations_count
+    kind: tool_call_count
+    tool_names:
+      - Agent
+      - get_subagent_result
+      - steer_subagent
+  - id: subagent_max_depth
+    kind: tool_call_max_depth
+    tool_names:
+      - Agent

@@ -1,0 +1,18 @@
+extensions:
+  - package: "pi-lens"
+    version: "3.8.32"
+    entry: "index.ts"
+
+# Profile-declared layer-2 metrics (Phase 4 / architecture doc §R1).
+# `tool_result_marker_count` scans tool_execution_end content for ⚠️/🔴
+# markers in write/edit results — replaces the framework-side
+# isLensWarning function and PI_LENS_MARKERS constant.
+metrics:
+  - id: lens_warnings_received
+    kind: tool_result_marker_count
+    applies_to_tools:
+      - write
+      - edit
+    markers:
+      - "⚠️"
+      - "🔴"

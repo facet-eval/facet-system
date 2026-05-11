@@ -1,0 +1,20 @@
+{
+  "name": "@facet/preset-pi-graph",
+  "version": "0.1.0",
+  "description": "FACET profile preset — Pi harness with pi-gitnexus graph-aware context for compound-c / compound-python and Haskell upfront-context bash hook.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:0837f3cb538a075ec6f1924dbc5f6b538adda4f2a3c9b4c81e9f44ea2ed5bedb"
+  },
+  "peerDependencies": {
+    "@facet/harness-pi": "workspace:*",
+    "pi-gitnexus": "0.5.1"
+  }
+}

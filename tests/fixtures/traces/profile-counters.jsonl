@@ -1,0 +1,17 @@
+{"_meta":{"trace_version":1,"harness":"pi","harness_version":"0.70.0"}}
+{"type":"agent_start"}
+{"type":"turn_start"}
+{"type":"tool_execution_start","toolCallId":"a1","toolName":"alpha_search","args":{"q":"foo"}}
+{"type":"tool_execution_end","toolCallId":"a1","toolName":"alpha_search","result":{"content":[{"type":"text","text":"[]"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"a2","toolName":"alpha_inspect","args":{"symbol":"bar"}}
+{"type":"tool_execution_end","toolCallId":"a2","toolName":"alpha_inspect","result":{"content":[{"type":"text","text":"none"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"b1","toolName":"beta_query","args":{"query":"x"}}
+{"type":"tool_execution_end","toolCallId":"b1","toolName":"beta_query","result":{"content":[{"type":"text","text":"[]"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"x1","toolName":"unrelated_tool","args":{"op":"definition"}}
+{"type":"tool_execution_end","toolCallId":"x1","toolName":"unrelated_tool","result":{"content":[{"type":"text","text":"none"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"g1","toolName":"gamma_spawn","args":{"description":"do work"}}
+{"type":"tool_execution_end","toolCallId":"g1","toolName":"gamma_spawn","result":{"content":[{"type":"text","text":"done"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"g2","toolName":"gamma_spawn","args":{"description":"more work"}}
+{"type":"tool_execution_end","toolCallId":"g2","toolName":"gamma_spawn","result":{"content":[{"type":"text","text":"done"}]},"isError":false}
+{"type":"turn_end","tokenUsage":{"input":2000,"output":50}}
+{"type":"agent_end"}

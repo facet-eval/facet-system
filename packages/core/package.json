@@ -1,0 +1,26 @@
+{
+  "name": "@facet/core",
+  "version": "0.1.0",
+  "description": "FACET core: runner, validator, tracer, bundle, evaluator, builtins, CLI.",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./dist/*"
+  },
+  "bin": {
+    "facet": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@facet/sdk": "workspace:*",
+    "@facet/harness-pi": "workspace:*",
+    "commander": "^12.1.0",
+    "execa": "^9.6.1",
+    "simple-git": "^3.36.0",
+    "yaml": "^2.5.1",
+    "zod": "^3.23.8"
+  }
+}

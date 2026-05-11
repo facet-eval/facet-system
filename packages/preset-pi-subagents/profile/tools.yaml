@@ -1,0 +1,8 @@
+tools:
+  - "read"
+  - "write"
+  - "edit"
+  - "bash"
+  - "Agent"
+  - "get_subagent_result"
+  - "steer_subagent"

@@ -1,0 +1,20 @@
+{
+  "name": "@facet/preset-pi-lsp",
+  "version": "0.1.0",
+  "description": "FACET profile preset — Pi harness with @dreki-gg/pi-lsp wiring per-scenario language servers (clangd, pylsp, haskell-language-server).",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:2ba6f1214d5d0baa62f330ee7d2759921b11d04a77a375712662f55dd1b08199"
+  },
+  "peerDependencies": {
+    "@dreki-gg/pi-lsp": "0.1.2",
+    "@facet/harness-pi": "workspace:*"
+  }
+}

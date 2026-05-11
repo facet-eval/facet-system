@@ -1,0 +1,19 @@
+{
+  "name": "@facet/preset-pi-default",
+  "version": "0.1.0",
+  "description": "FACET default profile preset for the Pi coding-agent harness — minimal tools, no extensions.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:4177c4c688febb958650363d595884de86c2ff0872166baccc106def850e608e"
+  },
+  "peerDependencies": {
+    "@facet/harness-pi": "workspace:*"
+  }
+}

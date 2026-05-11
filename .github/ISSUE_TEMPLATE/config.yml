@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Architecture discussion
+    url: https://github.com/facet-eval/facet-system/discussions
+    about: Use discussions for open-ended architecture questions.

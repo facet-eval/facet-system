@@ -1,0 +1,80 @@
+metadata:
+  id: bullet-08-parallel-acceptance
+  name: "Bullet 08 acceptance — parallel matrix"
+  description: >
+    Throwaway spec used to exercise `runAll` at parallelism > 1 against the
+    existing fizzbuzz-off-by-one scenario. Lives under tests/fixtures/ to
+    keep the user-facing examples/hello-world-experiment spec untouched.
+  version: "0.1.0"
+  author: "Diego"
+  seed: 42
+  framework_version: "0.1.0"
+  harness:
+    id: "pi"
+    package: "@facet/harness-pi"
+    version: "0.70.2"
+
+environment:
+  timeout_per_run_seconds: 600
+  max_tokens_per_run: 200000
+  max_total_cost_usd: 0.5
+  workspace_strategy: "git_worktree"
+
+varying_factors:
+  - id: prompt_id
+    description: "Two prompt levels from the compound-python scenario."
+    levels:
+      - id: underspecified
+      - id: specific
+
+  - id: profile
+    description: "Reuses the factor-study default profile."
+    levels:
+      - id: default
+        ref: "@facet/preset-pi-default"
+        hash: "sha256:4177c4c688febb958650363d595884de86c2ff0872166baccc106def850e608e"
+
+  - id: model
+    description: "Cheap OpenRouter model — same as factor-study."
+    levels:
+      - id: gemini-2.5-flash-lite
+        provider: openrouter
+        model_id: "google/gemini-2.5-flash-lite"
+
+scenarios:
+  - id: compound-python
+    ref: "../compound-python"
+    hash: "TBD"
+
+design:
+  type: full_factorial
+  repetitions: 2
+  parallelism: 2
+
+comparisons:
+  - id: prompt_effect
+    description: "Throwaway placeholder — bullet 08 is about parallelism, not analysis."
+    across: prompt_id
+    holding_constant: [profile, model, scenario]
+
+metrics:
+  trace:
+    capture:
+      - tool_calls
+      - tokens_in
+      - tokens_out
+      - latency_ms_per_turn
+      - file_reads
+      - context_size_per_turn
+  evaluator:
+    layers:
+      - id: correctness
+        type: oracle_script
+        script: "oracle/run.sh"
+        pass_condition: "exit_code == 0"
+  judge: null
+
+analysis:
+  type: none
+  emit:
+    - results_table_csv

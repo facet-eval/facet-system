@@ -1,0 +1,42 @@
+name: Design proposal
+description: Propose an architectural or cross-package change.
+title: "[Design]: "
+labels: ["type: design", "status: needs-triage"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What existing behavior or constraint motivates this?
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Proposed decision
+      description: State the decision in concrete terms.
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+      placeholder: |
+        Option A:
+        Option B:
+        Option C:
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Affected packages, tests, CI, docs, users, or migrations.
+    validations:
+      required: true
+  - type: textarea
+    id: rollout
+    attributes:
+      label: Rollout plan
+    validations:
+      required: false

@@ -1,0 +1,13 @@
+extensions:
+  - package: "pi-local-rag"
+    version: "0.3.0"
+    entry: "index.ts"
+
+# Profile-declared layer-2 metrics (Phase 4 / architecture doc §R1).
+metrics:
+  - id: rag_searches_count
+    kind: tool_call_count
+    tool_names:
+      - rag_index
+      - rag_query
+      - rag_status

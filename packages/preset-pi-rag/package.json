@@ -1,0 +1,20 @@
+{
+  "name": "@facet/preset-pi-rag",
+  "version": "0.1.0",
+  "description": "FACET profile preset — Pi harness with pi-local-rag for embedding-search context.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "profile"
+  ],
+  "facet": {
+    "profileRoot": "./profile",
+    "harness": "@facet/harness-pi",
+    "harnessVersionRange": "^0.70",
+    "hash": "sha256:a0419929a7bfece2f303b8d2f178e2594a95f5a2ebbef8d0ec8f9ba7bad11b78"
+  },
+  "peerDependencies": {
+    "@facet/harness-pi": "workspace:*",
+    "pi-local-rag": "0.3.0"
+  }
+}

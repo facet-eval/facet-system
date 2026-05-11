@@ -1,0 +1,82 @@
+metadata:
+  id: custom-metric-demo-001
+  name: "Custom metric kind demo"
+  description: >
+    Bullet 15.2 — shows how to ship a metric kind as a local plugin. The
+    plugin file (./plugins/turn-latency-p95) declares a turn_latency_p95
+    metric kind via @facet/sdk and exports register(registries). The CLI
+    dynamically imports it from the experiment package before parsing the
+    profile's `extensions.yaml`, so the rule below resolves at validate
+    time and lands in metrics.json.profile_metrics at run time.
+  version: "0.1.0"
+  author: "Diego"
+  seed: 42
+  framework_version: "0.1.0"
+  harness:
+    id: "pi"
+    package: "@facet/harness-pi"
+    version: "0.70.2"
+  plugins:
+    - "./plugins/turn-latency-p95"
+
+environment:
+  timeout_per_run_seconds: 120
+  max_tokens_per_run: 5000
+  max_total_cost_usd: 0.5
+  workspace_strategy: "git_worktree"
+
+varying_factors:
+  - id: prompt_id
+    description: "Single prompt — the demo only needs one cell."
+    levels:
+      - id: ping
+
+  - id: profile
+    description: >
+      Local profile whose extensions.yaml declares one metric rule of
+      kind `turn_latency_p95`. The kind is supplied by the plugin in
+      ./plugins/turn-latency-p95/ — registered via metadata.plugins
+      before the spec's profile YAML is read.
+    levels:
+      - id: demo
+        ref: "profiles/demo"
+        hash: "TBD"
+
+  - id: model
+    description: "Cheap OpenRouter model — demo only spends ~$0.01 per cell."
+    levels:
+      - id: gemini-2.5-flash-lite
+        provider: openrouter
+        model_id: "google/gemini-2.5-flash-lite"
+
+scenarios:
+  - id: echo-scenario
+    ref: "scenarios/echo-scenario"
+    hash: "TBD"
+
+design:
+  type: full_factorial
+  repetitions: 1
+  parallelism: 1
+
+comparisons: []
+
+metrics:
+  trace:
+    capture:
+      - tool_calls
+      - tokens_in
+      - tokens_out
+      - latency_ms_per_turn
+  evaluator:
+    layers:
+      - id: correctness
+        type: oracle_script
+        script: "oracle/run.sh"
+        pass_condition: "exit_code == 0"
+  judge: null
+
+analysis:
+  type: none
+  emit:
+    - results_table_csv

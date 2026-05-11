@@ -1,0 +1,10 @@
+id: fizzbuzz-off-by-one
+language: typescript
+task_type: bug_fix
+difficulty: trivial
+tags: [greenfield, isolated, deterministic-oracle]
+prompts:
+  - id: underspecified
+    file: prompts/underspecified.md
+  - id: specific
+    file: prompts/specific.md

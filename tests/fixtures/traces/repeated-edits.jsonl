@@ -1,0 +1,13 @@
+{"_meta":{"trace_version":1,"harness":"pi","harness_version":"0.70.0"}}
+{"type":"agent_start"}
+{"type":"turn_start"}
+{"type":"tool_execution_start","toolCallId":"e1","toolName":"edit","args":{"path":"src/x.ts","edits":[{"oldText":"a","newText":"b"}]}}
+{"type":"tool_execution_end","toolCallId":"e1","toolName":"edit","result":{"content":[{"type":"text","text":"ok"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"e2","toolName":"edit","args":{"path":"src/x.ts","edits":[{"oldText":"b","newText":"c"}]}}
+{"type":"tool_execution_end","toolCallId":"e2","toolName":"edit","result":{"content":[{"type":"text","text":"ok"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"w1","toolName":"write","args":{"path":"src/x.ts","content":"final"}}
+{"type":"tool_execution_end","toolCallId":"w1","toolName":"write","result":{"content":[{"type":"text","text":"ok"}]},"isError":false}
+{"type":"tool_execution_start","toolCallId":"e3","toolName":"edit","args":{"path":"src/y.ts","edits":[{"oldText":"a","newText":"b"}]}}
+{"type":"tool_execution_end","toolCallId":"e3","toolName":"edit","result":{"content":[{"type":"text","text":"ok"}]},"isError":false}
+{"type":"turn_end","tokenUsage":{"input":1234,"output":50}}
+{"type":"agent_end"}

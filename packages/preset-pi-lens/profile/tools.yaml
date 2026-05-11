@@ -1,0 +1,8 @@
+tools:
+  - "read"
+  - "write"
+  - "edit"
+  - "bash"
+  - "ast_grep_search"
+  - "ast_grep_replace"
+  - "lsp_navigation"

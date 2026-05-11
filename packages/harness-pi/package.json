@@ -1,0 +1,26 @@
+{
+  "name": "@facet/harness-pi",
+  "version": "0.1.0",
+  "description": "FACET harness adapter for the Pi coding agent.",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./translate": "./dist/translate.js",
+    "./types": "./dist/types.js",
+    "./version": "./dist/version.js",
+    "./metric-kinds/*": "./dist/metric-kinds/*.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@facet/sdk": "workspace:*",
+    "@mariozechner/pi-coding-agent": "^0.70.0"
+  },
+  "peerDependencies": {
+    "zod": "^3.23.8"
+  }
+}

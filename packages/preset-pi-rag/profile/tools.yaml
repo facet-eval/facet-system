@@ -1,0 +1,8 @@
+tools:
+  - "read"
+  - "write"
+  - "edit"
+  - "bash"
+  - "rag_index"
+  - "rag_query"
+  - "rag_status"

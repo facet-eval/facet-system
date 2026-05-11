@@ -1,0 +1,13 @@
+id: compound-python
+language: python
+task_type: compound
+difficulty: medium
+tags: [compound, multi-task, invisible-tests, oracle-with-regression]
+prompts:
+  - id: underspecified
+    file: prompts/underspecified.md
+  - id: medium
+    file: prompts/medium.md
+  - id: specific
+    file: prompts/specific.md
+requires_binaries: ["python3"]

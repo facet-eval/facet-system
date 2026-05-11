@@ -1,0 +1,11 @@
+# Profile-declared metric rules consumed by the dispatcher (Bullet
+# 12.6). The kind `turn_latency_p95` is *not* a framework builtin —
+# the plugin under `<spec>/plugins/turn-latency-p95/` declares it via
+# `defineMetricKind` and registers it through the CLI's plugin loader
+# (Bullet 15.2). The rule below names the kind by its `id` and passes
+# the per-rule config (`field`) that the plugin's `configSchema`
+# validates.
+metrics:
+  - id: turn_latency_p95
+    kind: turn_latency_p95
+    field: latencyMs

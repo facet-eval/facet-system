@@ -1,0 +1,11 @@
+{"_meta":{"trace_version":1,"harness":"pi","harness_version":"0.70.0"}}
+{"type":"agent_start"}
+{"type":"turn_start"}
+{"type":"tool_execution_start","toolCallId":"b1","toolName":"bash","args":{"command":"ls"}}
+{"type":"tool_execution_end","toolCallId":"b1","toolName":"bash","result":{"content":[{"type":"text","text":"a b c"}]},"isError":false}
+{"type":"turn_end","tokenUsage":{"input":1000,"output":40}}
+{"type":"turn_start"}
+{"type":"tool_execution_start","toolCallId":"b2","toolName":"bash","args":{"command":"pwd"}}
+{"type":"tool_execution_end","toolCallId":"b2","toolName":"bash","result":{"content":[{"type":"text","text":"/tmp"}]},"isError":false}
+{"type":"turn_end","tokenUsage":{"input":3000,"output":60}}
+{"type":"agent_end"}

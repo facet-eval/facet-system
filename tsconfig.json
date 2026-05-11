@@ -1,0 +1,16 @@
+{
+  "//": "Workspace root tsconfig — used only for editor / vitest path resolution. Each package builds via its own tsconfig.json.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@facet/sdk": ["./packages/sdk/src/index.ts"],
+      "@facet/sdk/*": ["./packages/sdk/src/*"],
+      "@facet/core": ["./packages/core/src/index.ts"],
+      "@facet/core/*": ["./packages/core/src/*"],
+      "@facet/harness-pi": ["./packages/harness-pi/src/index.ts"],
+      "@facet/harness-pi/*": ["./packages/harness-pi/src/*"]
+    }
+  },
+  "include": ["packages/*/src/**/*", "tests/**/*"]
+}

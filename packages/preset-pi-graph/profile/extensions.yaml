@@ -1,0 +1,38 @@
+extensions:
+  - package: "pi-gitnexus"
+    version: "0.5.1"
+    entry: "src/index.ts"
+    applies_to_scenarios: ["compound-c", "compound-python"]
+
+upfront_context:
+  - applies_to_scenarios: ["compound-haskell"]
+    command: "bash"
+    args: ["upfront/haskell.sh", "${WORKSPACE}"]
+    cwd: "${WORKSPACE}"
+    timeout_ms: 60000
+    header: "## Workspace structural context (profile-graph, Haskell)"
+    notes: >
+      No Pi extension is loaded for Haskell. The module dependency graph
+      is produced once at session start by graphmod (modules) and
+      cabal-plan (package wiring), serialized to Markdown by
+      upfront/haskell.sh, and prepended to the workspace context.
+
+requires_binaries_per_scenario:
+  compound-c: ["gitnexus"]
+  compound-python: ["gitnexus"]
+  compound-haskell: ["graphmod", "cabal-plan", "cabal", "ghc"]
+
+# Profile-declared layer-2 metrics (Phase 4 / architecture doc §R1).
+# `tool_call_count` over the seven gitnexus tools the package exposes —
+# replaces the framework-side TOOL_OWNER → graph_queries_count counter.
+metrics:
+  - id: graph_queries_count
+    kind: tool_call_count
+    tool_names:
+      - gitnexus_list_repos
+      - gitnexus_query
+      - gitnexus_context
+      - gitnexus_impact
+      - gitnexus_detect_changes
+      - gitnexus_rename
+      - gitnexus_cypher
