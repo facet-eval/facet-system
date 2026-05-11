@@ -1,0 +1,26 @@
+cabal-version:      2.2
+name:               rpncalc
+version:            0.1.0.0
+synopsis:           A tiny postfix calculator on integers.
+license:            BSD-3-Clause
+author:             facet
+maintainer:         facet@example.com
+build-type:         Simple
+
+library
+    exposed-modules:  Op
+                    , Token
+                    , Lex
+                    , Eval
+    hs-source-dirs:   src
+    default-language: Haskell2010
+    build-depends:    base ^>=4.18
+    ghc-options:      -Wall
+
+executable rpncalc
+    main-is:          Main.hs
+    hs-source-dirs:   app
+    default-language: Haskell2010
+    build-depends:    base ^>=4.18
+                    , rpncalc
+    ghc-options:      -Wall

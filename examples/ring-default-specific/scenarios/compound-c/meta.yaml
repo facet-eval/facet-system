@@ -1,0 +1,11 @@
+id: compound-c
+language: c
+task_type: compound
+difficulty: medium
+tags: [compound, multi-task, invisible-tests, oracle-with-regression]
+prompts:
+  - id: medium
+    file: prompts/medium.md
+  - id: specific
+    file: prompts/specific.md
+requires_binaries: ["cc", "make"]

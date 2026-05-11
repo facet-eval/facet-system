@@ -1,0 +1,3 @@
+{"source":"build-system","severity":"error","tags":[],"message":"a"}
+{"source":"build-system","severity":"warning","tags":[],"message":"b"}
+{"source":"deploy","severity":"info","tags":[],"message":"c"}

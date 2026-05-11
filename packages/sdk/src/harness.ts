@@ -35,6 +35,14 @@ export interface HarnessRunConfig {
   // they do not understand. The SDK keeps the shape open on purpose so a
   // new harness can declare its own keys without a framework edit.
   readonly extras?: Readonly<Record<string, unknown>>;
+  // Absolute path to the experiment package root (the directory that
+  // contains `spec.yaml`). Framework-level metadata — not harness-specific
+  // — so adapters can resolve package-local files by their own convention
+  // (e.g. Pi reads `<packageRoot>/models.json` to extend its model
+  // registry without forcing the user to edit `~/.pi/agent/models.json`).
+  // Optional because back-compat test seams construct configs without a
+  // package; production callers always populate it.
+  readonly packageRoot?: string;
 }
 
 // ts-prune-ignore-next

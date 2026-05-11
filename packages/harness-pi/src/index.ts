@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -222,6 +222,21 @@ export function buildResourceLoader(
   });
 }
 
+// Resolves the experiment-package-local `models.json` path when the
+// runner supplies a packageRoot and that file exists next to spec.yaml.
+// Pi's `ModelRegistry.create(auth, customPath)` then loads custom-model
+// entries (cost, contextWindow, modalities) from the experiment package
+// instead of the user's `~/.pi/agent/models.json`. Returning undefined
+// preserves the default behaviour (built-ins + `~/.pi/agent/models.json`)
+// for legacy specs that don't ship a registry of their own.
+function resolveModelsJsonPath(
+  packageRoot: string | undefined,
+): string | undefined {
+  if (packageRoot === undefined) return undefined;
+  const candidate = path.join(packageRoot, "models.json");
+  return existsSync(candidate) ? candidate : undefined;
+}
+
 export async function runSession(
   config: PiSessionConfig,
   userPrompt: string,
@@ -234,12 +249,17 @@ export async function runSession(
   if (config.apiKey !== undefined && config.apiKey.length > 0) {
     authStorage.setRuntimeApiKey(config.provider, config.apiKey);
   }
-  const modelRegistry = ModelRegistry.create(authStorage);
+  const modelsJsonPath = resolveModelsJsonPath(config.packageRoot);
+  const modelRegistry =
+    modelsJsonPath !== undefined
+      ? ModelRegistry.create(authStorage, modelsJsonPath)
+      : ModelRegistry.create(authStorage);
   const model = modelRegistry.find(config.provider, config.modelId);
   if (!model) {
+    const activeRegistry = modelsJsonPath ?? "~/.pi/agent/models.json";
     throw new PiAdapterError(
       `Model not found in pi registry: provider="${config.provider}", id="${config.modelId}". ` +
-        `Check that the id matches a built-in model or a custom entry in ~/.pi/agent/models.json.`,
+        `Check that the id matches a built-in model or a custom entry in ${activeRegistry}.`,
     );
   }
 
@@ -439,6 +459,13 @@ export const PiHarness: HarnessAdapter = defineHarness({
         : {}),
       ...(config.harnessParams !== undefined
         ? { harnessParams: config.harnessParams }
+        : {}),
+      // Forward the framework-level packageRoot first-class field so the
+      // inner runSession can resolve a package-local models.json via
+      // `resolveModelsJsonPath`. Not routed through `extras` on purpose:
+      // packageRoot is harness-agnostic SDK contract, not a Pi knob.
+      ...(config.packageRoot !== undefined
+        ? { packageRoot: config.packageRoot }
         : {}),
     };
     return runSession(piConfig, userPrompt, cwd, onEvent);
