@@ -45,6 +45,14 @@ export interface PiSessionConfig {
   // applied param and otherwise ignores them — the values are still
   // recorded in `runs/<id>/config.yaml` for traceability.
   readonly harnessParams?: Readonly<Record<string, unknown>>;
+  // Absolute path to the experiment package root, forwarded from the SDK
+  // contract's `HarnessRunConfig.packageRoot`. When present and the
+  // package ships a `models.json` next to its `spec.yaml`, this adapter
+  // points Pi's `ModelRegistry` at that file instead of the default
+  // `~/.pi/agent/models.json` — so a spec author can declare custom
+  // models (cost, context_window, modalities) inside the experiment
+  // package and the runs become portable across machines and CI.
+  readonly packageRoot?: string;
 }
 
 export interface PiTokenUsage {

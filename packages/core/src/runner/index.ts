@@ -585,6 +585,13 @@ export async function runSingleRun(params: RunSingleRunParams): Promise<RunOutco
         ...(runConfig.harnessParams !== undefined
           ? { harnessParams: runConfig.harnessParams }
           : {}),
+        // Framework-level first-class field on the SDK contract. Adapters
+        // that honour package-local conventions (e.g. Pi → models.json)
+        // read this; the rest ignore it. Optional because legacy test
+        // seams construct configs without a packageRoot.
+        ...(params.packageRoot !== undefined
+          ? { packageRoot: params.packageRoot }
+          : {}),
         extras,
       },
       prompt,
